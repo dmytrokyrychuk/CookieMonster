@@ -5,12 +5,15 @@ import CopyData from '../../Sim/SimulationData/CopyData';
 import { SimDoSims, SimObjects } from '../../Sim/VariablesAndData';
 import { CacheCostDragonUpgrade, CacheLastDragonLevel } from '../VariablesAndData'; // eslint-disable-line no-unused-vars
 
+const SKIP_DRAGON_COST_CALCULATION = true;
+
 /**
  * This functions caches the current cost of upgrading the dragon level so it can be displayed in the tooltip
  */
 export default function CacheDragonCost() {
   if (CacheLastDragonLevel !== Game.dragonLevel || SimDoSims) {
     if (
+      !SKIP_DRAGON_COST_CALCULATION &&
       Game.dragonLevel < 25 &&
       Game.dragonLevels[Game.dragonLevel].buy.toString().includes('sacrifice')
     ) {
